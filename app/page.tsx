@@ -1,5 +1,11 @@
+import Welcome from "@/components/Welcome";
+
 const page = () => {
-  return <main></main>;
+  return (
+    <main>
+      <Welcome />
+    </main>
+  );
 };
 
 export default page;

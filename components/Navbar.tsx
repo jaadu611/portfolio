@@ -5,6 +5,7 @@ import Image from "next/image";
 import { navbarIcons, navbarLinks } from "@/constants/Navabar.constants";
 import NavTime from "./NavTime";
 
+// Main Navbar component
 const Navbar = () => {
   return (
     // Main Navbar
@@ -29,7 +30,7 @@ const Navbar = () => {
         </p>
 
         {/* Navbar items */}
-        <ul className="flex items-center gap-5 max-sm:hidden mt-1">
+        <ul className="flex items-center gap-5 mt-1">
           {navbarLinks.map((navItem) => (
             <li
               className="text-sm font-semibold cursor-pointer transition-all hover:bg-white/30 p-1 rounded-md"
@@ -44,7 +45,7 @@ const Navbar = () => {
       {/* Right Side of the navbar */}
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         {/* Navbar icons */}
-        <ul className="flex items-center gap-3 max-sm:hidden">
+        <ul className="flex items-center gap-3">
           {navbarIcons.map((icon) => (
             <button
               className="hover:cursor-pointer hover:bg-white/30 p-1 rounded-md transition-all"
