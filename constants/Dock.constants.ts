@@ -13,7 +13,7 @@ const dockApps = [
   },
   {
     id: "photos",
-    name: "Gallary",
+    name: "Gallery",
     icon: "photos.webp",
     canOpen: true,
   },

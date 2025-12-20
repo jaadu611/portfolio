@@ -79,7 +79,7 @@ const Dock = () => {
   return (
     <section
       id="dock"
-      className="absolute h-fit -bottom-5 left-1/2 -translate-1/2 z-50 select-none"
+      className="absolute h-fit -bottom-5 left-1/2 -translate-x-1/2 z-50 select-none"
     >
       {/* Dock */}
       <div
