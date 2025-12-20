@@ -4,6 +4,7 @@
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
+// Main NavTime component
 const NavTime = () => {
   // Mounted state
   const [mounted, setMounted] = useState(false);

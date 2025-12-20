@@ -13,6 +13,7 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 - 🖼️ **Optimized Images** using `next/image`
 - 🧠 **Type-safe constants & components**
 - 🍎 **macOS-inspired UI/UX**
+- 🖱️ **Interactive Hover States** (smooth mouse-follow effects & subtle animations)
 
 ---
 
@@ -24,6 +25,7 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 | Language    | TypeScript   |
 | Styling     | Tailwind CSS |
 | Date & Time | dayjs        |
+| Animations  | GSAP         |
 
 ---
 
@@ -38,7 +40,8 @@ src/
 │
 ├── components/
 │   ├── Navbar.tsx
-│   └── NavTime.tsx
+│   ├── NavTime.tsx
+│   └── Welcome.tsx
 │
 ├── constants/
 │   └── Navbar.constants.ts
@@ -55,6 +58,14 @@ src/
 - **Navbar** → Server Component (static, fast)
 - **NavTime** → Client Component (dynamic time)
 - Prevents hydration issues by rendering time **only after mount**
+
+---
+
+## 👋 Welcome Screen Architecture
+
+- **Welcome** → Server Component (layout & static copy)
+- **Welcome.client** → Client Component (dynamic greeting / effects)
+- Avoids hydration mismatches by running **time- or state-based logic only on the client**
 
 ---
 
