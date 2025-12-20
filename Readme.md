@@ -41,7 +41,8 @@ src/
 ├── components/
 │   ├── Navbar.tsx
 │   ├── NavTime.tsx
-│   └── Welcome.tsx
+│   ├── Welcome.tsx
+│   └── Welcome.client.tsx
 │
 ├── constants/
 │   └── Navbar.constants.ts
