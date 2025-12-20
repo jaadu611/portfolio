@@ -53,27 +53,38 @@ const setupTextHover = (container: HTMLElement, type: FontWeightType) => {
     letters.forEach((letter) => animateLetter(letter, base, 0.45));
   };
 
+  // Add listeners
+  container.addEventListener("mousemove", handleMouseMove);
+  container.addEventListener("mouseleave", handleMouseLeave);
+
+  // Clean up
   return () => {
     container.removeEventListener("mousemove", handleMouseMove);
     container.removeEventListener("mouseleave", handleMouseLeave);
   };
 };
 
-// Main WelcomeClient
+// Main WelcomeClient component
 const WelcomeClient = () => {
-  useGSAP(() => {
-    const title = document.querySelector<HTMLElement>("[data-title]");
-    const subtitle = document.querySelector<HTMLElement>("[data-subtitle]");
+  useGSAP((_, contextSafe) => {
+    if (contextSafe === undefined) return;
 
-    if (!title || !subtitle) return;
+    const setup = contextSafe(() => {
+      const title = document.querySelector<HTMLElement>("[data-title]");
+      const subtitle = document.querySelector<HTMLElement>("[data-subtitle]");
 
-    const cleanTitle = setupTextHover(title, "title");
-    const cleanSubtitle = setupTextHover(subtitle, "subtitle");
+      if (!title || !subtitle) return;
 
-    return () => {
-      cleanTitle?.();
-      cleanSubtitle?.();
-    };
+      const cleanTitle = setupTextHover(title, "title");
+      const cleanSubtitle = setupTextHover(subtitle, "subtitle");
+
+      return () => {
+        cleanTitle?.();
+        cleanSubtitle?.();
+      };
+    });
+
+    setup();
   }, []);
 
   return null;

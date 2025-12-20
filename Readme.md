@@ -19,13 +19,14 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 
 ## 🛠️ Tech Stack
 
-| Category    | Tech         |
-| ----------- | ------------ |
-| Framework   | Next.js 16   |
-| Language    | TypeScript   |
-| Styling     | Tailwind CSS |
-| Date & Time | dayjs        |
-| Animations  | GSAP         |
+| Category      | Tech         |
+| ------------- | ------------ |
+| Framework     | Next.js 16   |
+| Language      | TypeScript   |
+| Styling       | Tailwind CSS |
+| Date & Time   | dayjs        |
+| Animations    | GSAP         |
+| Accessibility | Tooltip      |
 
 ---
 
@@ -41,13 +42,15 @@ src/
 ├── components/
 │   ├── Navbar.tsx
 │   ├── NavTime.tsx
+│   ├── Dock.tsx
 │   └── Welcome.tsx
 │
 ├── constants/
-│   └── Navbar.constants.ts
-│
+│   ├── Navbar.constants.ts
+│   └── Dock.constants.tsx
 ├── public/
 │   ├── icons/
+│   ├── images/
 │   └── wallpaper.webp
 ```
 
@@ -65,7 +68,15 @@ src/
 
 - **Welcome** → Server Component (layout & static copy)
 - **Welcome.client** → Client Component (dynamic greeting / effects)
-- Avoids hydration mismatches by running **time- or state-based logic only on the client**
+- Avoids hydration mismatches by running **time or state-based logic only on the client**
+
+---
+
+## 🖥️ Dock Architecture
+
+- **Dock** → Client Component (interactive layout & animations)
+- **GSAP hover logic** → Client-only (mouse tracking & magnification)
+- Ensures smooth interactions by running **pointer-based animations only on the client**
 
 ---
 
@@ -112,11 +123,14 @@ Background wallpaper is applied via inline styles for compatibility with Next.js
 
 ## 🧠 Key Learnings / Best Practices Used
 
-- Avoid hydration mismatch with time/date values
-- Use **Server Components by default**
-- Isolate browser-only logic in Client Components
-- Prefer type inference over inline typing
-- Use absolute paths for public assets
+- Avoid hydration mismatches by isolating **time, date, and pointer-based logic** in Client Components
+- Use **Server Components by default** for layout, static content, and fast initial render
+- Split complex UI into **SSR shells + CSR behavior layers** (Navbar, Welcome Screen, Dock)
+- Keep the **Navbar** mostly server-rendered, with client-only subcomponents for live data
+- Implement the **Welcome Screen** with static markup (SSR) and hover/animation logic (CSR)
+- Run **mouse-driven animations (Dock magnification)** strictly on the client
+- Prefer **type inference and derived types** over inline, duplicated typings
+- Use **absolute paths** for public assets to ensure predictable loading
 
 ---
 

@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen w-screen overflow-hidden bg-[url('/wallpaper.webp')] bg-cover bg-center bg-no-repeat">
+      <body className="min-h-screen w-screen overflow-hidden bg-[url('/wallpapers/wallpaper1.webp')] bg-cover bg-center bg-no-repeat">
         <Navbar />
         {children}
       </body>
