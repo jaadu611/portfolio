@@ -63,8 +63,8 @@ src/
 
 ## 👋 Welcome Screen Architecture
 
-- **WelcomeScreen** → Server Component (layout & static copy)
-- **WelcomeGreeting** → Client Component (dynamic greeting / effects)
+- **Welcome** → Server Component (layout & static copy)
+- **Welcome.client** → Client Component (dynamic greeting / effects)
 - Avoids hydration mismatches by running **time- or state-based logic only on the client**
 
 ---
