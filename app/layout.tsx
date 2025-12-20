@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen w-screen overflow-hidden bg-[url('/wallpaper.webp')] bg-cover bg-center bg-no-repeat">
+        <Navbar />
         {children}
       </body>
     </html>

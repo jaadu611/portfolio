@@ -1,5 +1,5 @@
 const page = () => {
-  return <main>My Portfolio</main>;
+  return <main></main>;
 };
 
 export default page;
