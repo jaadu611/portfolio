@@ -1,8 +1,10 @@
 "use client";
 
+// External Imports
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+// Font weight used in animation
 const FONT_WEIGHT = {
   subtitle: { min: 200, max: 700, default: 200 },
   title: { min: 400, max: 900, default: 400 },
@@ -31,6 +33,7 @@ const setupTextHover = (container: HTMLElement, type: FontWeightType) => {
 
   const { min, max, default: base } = FONT_WEIGHT[type];
 
+  // When mouse hovers in the text
   const handleMouseMove = (e: MouseEvent) => {
     const { left } = container.getBoundingClientRect();
     const mouseX = e.clientX - left;
@@ -45,12 +48,10 @@ const setupTextHover = (container: HTMLElement, type: FontWeightType) => {
     });
   };
 
+  // When mouse leaves the text
   const handleMouseLeave = () => {
     letters.forEach((letter) => animateLetter(letter, base, 0.45));
   };
-
-  container.addEventListener("mousemove", handleMouseMove);
-  container.addEventListener("mouseleave", handleMouseLeave);
 
   return () => {
     container.removeEventListener("mousemove", handleMouseMove);
@@ -58,6 +59,7 @@ const setupTextHover = (container: HTMLElement, type: FontWeightType) => {
   };
 };
 
+// Main WelcomeClient
 const WelcomeClient = () => {
   useGSAP(() => {
     const title = document.querySelector<HTMLElement>("[data-title]");

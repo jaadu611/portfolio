@@ -1,14 +1,16 @@
-// app/components/Welcome.tsx (Server Component)
-
+// External imports
 import { Inter } from "next/font/google";
+
+// Internal imports
 import WelcomeClient from "./Welcome.client";
 
+// Font used in GSAP
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
-// Render text as individual letters (safe for SSR)
+// Render text as individual letters
 const renderText = (text: string, className: string, baseWeight: number) =>
   [...text].map((char, idx) => (
     <span
@@ -25,6 +27,7 @@ const renderText = (text: string, className: string, baseWeight: number) =>
     </span>
   ));
 
+// Main Welcome
 const Welcome = () => {
   return (
     <section
