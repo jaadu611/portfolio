@@ -121,10 +121,11 @@ const Dock = () => {
           </div>
         ))}
 
-        {/* Tool tip for the icons */}
+        {/* Tool tip */}
         <Tooltip
           id="dock-tooltip"
           place="top"
+          delayHide={100}
           className="py-1! px-3! w-fit! text-center! text-xs! rounded-md! bg-blue-200! text-blue-900! shadow-2xl!"
         />
       </div>

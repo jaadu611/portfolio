@@ -27,7 +27,7 @@ const NavTime = () => {
   return (
     //Time and Date
     <time className="cursor-pointer transition-all hover:bg-white/30 p-1 rounded-md font-medium">
-      {time.format("ddd MM D h:mm A")}
+      {time.format("ddd D h:mm A")}
     </time>
   );
 };

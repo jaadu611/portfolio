@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 // Internal imports
 import WelcomeClient from "./Welcome.client";
+import FullscreentToggle from "./FullscreentToggle";
 
 // Font used in GSAP
 const inter = Inter({
@@ -45,6 +46,8 @@ const Welcome = () => {
           400
         )}
       </h1>
+
+      <FullscreentToggle />
 
       {/* Client-only logic */}
       <WelcomeClient />

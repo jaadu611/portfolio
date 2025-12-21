@@ -15,6 +15,11 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 - 🍎 **macOS-inspired UI/UX**
 - 🖱️ **Interactive Hover States** (smooth mouse-follow effects & subtle animations)
 - 🧠 **Centralized State with Zustand** (lightweight global store and state management)
+- 🪟 **Resizable & Draggable Windows** with GSAP + Draggable
+- 🖥️ **Window Controls** (minimize, maximize, close) with smooth animations
+- 📜 **Terminal Emulator** (custom commands, history, blinking cursor)
+- 🛠️ **RAG-style Autocomplete** / CLI-style interactions in Terminal
+- 🌐 **Dynamic Layout Adjustments** (full-screen, centered windows, responsive)
 
 ---
 
@@ -45,18 +50,29 @@ src/
 │   ├── Navbar.tsx
 │   ├── NavTime.tsx
 │   ├── Dock.tsx
+│   ├── FullscreenToggle.tsx
+│   ├── WindowControls.tsx
 │   └── Welcome.tsx
 │
 ├── constants/
 │   ├── Navbar.constants.ts
+│   ├── Terminal.constants.ts
 │   ├── Store.constants.ts
 │   └── Dock.constants.tsx
+│
+├── hoc/
+│   └── windowWrapper.tsx
+│
 ├── public/
 │   ├── icons/
 │   ├── images/
 │   └── wallpaper.webp
+│
 ├── store/
 │   └── window.ts
+│
+└── Windows/
+    └── Terminal.tsx
 ```
 
 ---
@@ -91,6 +107,42 @@ src/
 - **Single `toggleWindow` action** → Controls open, focus, and z-index behavior
 - **Centralized window config** → Ensures consistent IDs, default state, and type safety
 - Guarantees predictable window behavior by keeping **UI state and side effects out of components**
+
+---
+
+## 🪟 Window Store Architecture
+
+- **Zustand-based window store** → Client-only state manager for window lifecycle & stacking
+- **Single `toggleWindow` action** → Handles open, focus, and z-index updates
+- **Centralized window config** → Enforces consistent IDs, defaults, and type safety
+- Keeps **UI components stateless** and behavior predictable
+
+---
+
+## 🧩 Window Wrapper HOC
+
+- **Higher-order wrapper** → Injects drag, focus, and animation logic
+- **Shared behavior layer** → Eliminates duplication across windows
+- **Content-agnostic design** → Wrapped components remain UI-only
+- Guarantees **consistent window behavior** system-wide
+
+---
+
+## 🖥️ Terminal Architecture
+
+- **Keyboard-driven input loop** → No hidden inputs or forms
+- **Command registry pattern** → Declarative, extensible command system
+- **Deterministic history rendering** → Output is replayable and predictable
+- **Focus-aware cursor state** → Visual feedback matches interaction
+
+---
+
+## 🎬 Animation Layer
+
+- **GSAP-powered transitions** → Open, close, maximize, restore
+- **State-driven animations** → UI reacts to store changes, not events
+- **Safe transform management** → Prevents layout drift
+- Ensures **smooth, interruption-free motion**
 
 ---
 
@@ -145,16 +197,9 @@ Background wallpaper is applied via inline styles for compatibility with Next.js
 - Run **mouse-driven animations (Dock magnification)** strictly on the client
 - Prefer **type inference and derived types** over inline, duplicated typings
 - Use **absolute paths** for public assets to ensure predictable loading
-
----
-
-## 📌 Future Improvements
-
-- 🖥️ Fullscreen toggle (OS-style)
-- 🪟 Draggable windows
-- 🧩 Dock-style icon animations
-- 🌙 Dark mode
-- 🧭 Section routing / smooth scrolling
+- Centralize **global state (Zustand)** for client interactions to avoid prop drilling
+- Wrap complex behaviors in **HOCs** or reusable hooks to reduce duplication
+- Keep **animation state separate from layout state** to prevent unnecessary re-renders
 
 ---
 
