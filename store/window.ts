@@ -13,6 +13,8 @@ interface WindowItem {
   isOpen: boolean;
   zIndex: number;
   data: string | null;
+  kill?: boolean;
+  isMaximized?: boolean;
 }
 
 // type of window keys
@@ -23,6 +25,9 @@ interface WindowState {
   windows: Record<WindowKey, WindowItem>;
   nextZIndex: number;
   toggleWindow: (key: WindowKey, data?: string | null) => void;
+  focusWindow: (key: WindowKey, data?: string | null) => void;
+  killWindowState: (key: WindowKey) => void;
+  isMaximized: (key: WindowKey) => void;
 }
 
 // Extract correct data type from the config
@@ -44,23 +49,54 @@ const useWindowStore = create<WindowState>()(
     // Toggle window
     toggleWindow: (key, data = null) =>
       set((state) => {
-        // Get the window
         const win = state.windows[key];
-
-        // Return if no window
         if (!win) return;
 
-        if (!win.isOpen) {
-          // Open function
-          win.isOpen = true;
-          win.zIndex = state.nextZIndex++;
-          win.data = data;
-        } else {
-          // Close function
+        // Close if opened
+        if (win.isOpen) {
           win.isOpen = false;
           win.zIndex = INITIAL_Z_INDEX;
           win.data = null;
+          return;
         }
+
+        // Open if closed
+        win.isOpen = true;
+        win.zIndex = state.nextZIndex++;
+        win.data = data;
+
+        // Reset killed state when reopening
+        win.kill = false;
+      }),
+
+    // Focus the selected window
+    focusWindow: (key) =>
+      set((state) => {
+        const win = state.windows[key];
+        if (!win || !win.isOpen) return;
+
+        win.zIndex = state.nextZIndex++;
+      }),
+
+    // Set killed state for a window
+    killWindowState: (key) =>
+      set((state) => {
+        const win = state.windows[key];
+        if (!win) return;
+        win.isOpen = false;
+        win.zIndex = INITIAL_Z_INDEX;
+        win.data = null;
+        win.kill = true;
+        return;
+      }),
+
+    // Set maximized state for a window
+    isMaximized: (key) =>
+      set((state) => {
+        const win = state.windows[key];
+        if (!win) return;
+
+        win.isMaximized = !win.isMaximized;
       }),
   }))
 );
