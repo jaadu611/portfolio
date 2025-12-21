@@ -8,6 +8,12 @@ export const metadata: Metadata = {
     "Jaadu’s portfolio. I write code, summon bugs, banish them later, and ship full-stack apps powered by caffeine and questionable confidence",
 };
 
+/**
+ * Provides the application's root HTML structure, global body styling, and top navigation.
+ *
+ * @param children - The page content to render inside the layout beneath the navbar
+ * @returns The root HTML and body elements containing the Navbar and the provided `children`
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
