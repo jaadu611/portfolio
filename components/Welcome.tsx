@@ -35,12 +35,12 @@ const Welcome = () => {
       className={`${inter.className} flex flex-col items-center justify-center text-white h-dvh`}
     >
       <p data-subtitle>
-        {renderText("Portfolio OS.", "text-8xl font-normal", 200)}
+        {renderText("Portfolio OS", "text-8xl font-normal", 200)}
       </p>
 
       <h1 data-title className="mt-7">
         {renderText(
-          "Running purely on prayers and hopes",
+          "Held together with prayers and hopes",
           "text-3xl italic",
           400
         )}

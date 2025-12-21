@@ -1,4 +1,13 @@
-const dockApps = [
+// Internal imports
+import { WINDOW_CONFIG } from "./Store.constants";
+
+// Dock apps
+const dockApps: {
+  id: keyof typeof WINDOW_CONFIG;
+  name: string;
+  icon: string;
+  canOpen: boolean;
+}[] = [
   {
     id: "finder",
     name: "Portfolio",
@@ -18,7 +27,7 @@ const dockApps = [
     canOpen: true,
   },
   {
-    id: "contacts",
+    id: "contact",
     name: "Contacts",
     icon: "contact.webp",
     canOpen: true,

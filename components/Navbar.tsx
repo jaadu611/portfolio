@@ -26,7 +26,7 @@ const Navbar = () => {
           <span className="bg-linear-to-r from-indigo-800 to-blue-800 bg-clip-text text-transparent">
             Portfolio
           </span>{" "}
-          os
+          OS
         </p>
 
         {/* Navbar items */}
