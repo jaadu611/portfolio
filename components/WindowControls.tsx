@@ -18,7 +18,7 @@ const WindowControls = ({ target }: { target: keyof typeof WINDOW_CONFIG }) => {
     <div className="flex absolute left-3 top-3 gap-2">
       <div
         className="w-3.5 h-3.5 rounded-full bg-[#ff5f56] hover:bg-[#ff2d1f] cursor-pointer flex items-center justify-center transition-all duration-150"
-        onClick={() => (toggleWindow(target), killWindowState(target, true))}
+        onClick={() => (toggleWindow(target), killWindowState(target))}
       >
         <X size={10} className="text-white" />
       </div>

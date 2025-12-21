@@ -26,7 +26,7 @@ interface WindowState {
   nextZIndex: number;
   toggleWindow: (key: WindowKey, data?: string | null) => void;
   focusWindow: (key: WindowKey, data?: string | null) => void;
-  killWindowState: (key: WindowKey, condition: boolean) => void;
+  killWindowState: (key: WindowKey) => void;
   isMaximized: (key: WindowKey) => void;
 }
 

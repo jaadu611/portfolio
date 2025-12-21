@@ -43,6 +43,8 @@ const windowWrapper = <P extends object>(
 
     // Make the window appear at the center
     useEffect(() => {
+      if (typeof window === "undefined") return;
+
       const width = 720;
       const height = 420;
       // eslint-disable-next-line react-hooks/set-state-in-effect

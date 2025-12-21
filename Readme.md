@@ -103,15 +103,6 @@ src/
 
 ## 🪟 Window Store Architecture
 
-- **Window Store (Zustand + Immer)** → Client-only state manager (window lifecycle & stacking)
-- **Single `toggleWindow` action** → Controls open, focus, and z-index behavior
-- **Centralized window config** → Ensures consistent IDs, default state, and type safety
-- Guarantees predictable window behavior by keeping **UI state and side effects out of components**
-
----
-
-## 🪟 Window Store Architecture
-
 - **Zustand-based window store** → Client-only state manager for window lifecycle & stacking
 - **Single `toggleWindow` action** → Handles open, focus, and z-index updates
 - **Centralized window config** → Enforces consistent IDs, defaults, and type safety

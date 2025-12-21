@@ -2,21 +2,27 @@
 
 // External imports
 import { Square } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Main fullscreen toggle component
 const FullscreenToggle = () => {
   // Check if fullscreen or not
   const [isFullscreen, setFullscreen] = useState(false);
 
+  useEffect(() => {
+    const handleChange = () => {
+      setFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleChange);
+    return () => document.removeEventListener("fullscreenchange", handleChange);
+  }, []);
+
   // Toggle the function
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setFullscreen(true);
+      document.documentElement.requestFullscreen().catch(console.error);
     } else {
-      document.exitFullscreen();
-      setFullscreen(false);
+      document.exitFullscreen().catch(console.error);
     }
   };
 

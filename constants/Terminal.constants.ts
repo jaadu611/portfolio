@@ -108,7 +108,7 @@ const TERMINAL_COMMANDS: Record<string, TerminalCommand> = {
   },
 
   slap: {
-    description: "Usefull for annoying co-workers",
+    description: "Useful for annoying co-workers",
     run: (args) => {
       if (!args?.length) return "Usage: slap <target>";
       const targets = args.join(" ");
