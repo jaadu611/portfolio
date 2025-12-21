@@ -9,12 +9,18 @@ import gsap from "gsap";
 
 // Internal imports
 import { dockApps } from "@/constants/Dock.constants";
+import useWindowStore from "@/store/window";
+import { WINDOW_CONFIG } from "@/constants/Store.constants";
 
 // Main Dock component
 const Dock = () => {
   // Dock reference
   const dockRef = useRef<HTMLDivElement | null>(null);
 
+  // Import function from store
+  const { toggleWindow } = useWindowStore();
+
+  // Apply animation
   useGSAP(() => {
     const dock = dockRef.current;
     if (!dock) return;
@@ -72,14 +78,18 @@ const Dock = () => {
   }, []);
 
   // Open the app window
-  const toggleApp = (app: { id: string; canOpen: boolean }) => {
-    // TODO implement open window logic
+  const toggleApp = (app: {
+    id: keyof typeof WINDOW_CONFIG;
+    canOpen: boolean;
+  }) => {
+    if (!app.canOpen) return;
+    toggleWindow(app.id);
   };
 
   return (
     <section
       id="dock"
-      className="absolute h-fit -bottom-5 left-1/2 -translate-x-1/2 z-50 select-none"
+      className="absolute h-fit bottom-5 left-1/2 -translate-x-1/2 z-50 select-none"
     >
       {/* Dock */}
       <div
@@ -103,8 +113,9 @@ const Dock = () => {
                 alt={name}
                 loading="lazy"
                 className={canOpen ? "" : "opacity-60"}
-                height={70}
-                width={70}
+                height={60}
+                width={60}
+                style={{ width: "auto", height: "auto" }}
               />
             </button>
           </div>

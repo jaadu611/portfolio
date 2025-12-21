@@ -14,6 +14,7 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 - 🧠 **Type-safe constants & components**
 - 🍎 **macOS-inspired UI/UX**
 - 🖱️ **Interactive Hover States** (smooth mouse-follow effects & subtle animations)
+- 🧠 **Centralized State with Zustand** (lightweight global store and state management)
 
 ---
 
@@ -27,6 +28,7 @@ A macOS-inspired personal portfolio built with **Next.js App Router**, **TypeScr
 | Date & Time   | dayjs        |
 | Animations    | GSAP         |
 | Accessibility | Tooltip      |
+| States        | Zustand      |
 
 ---
 
@@ -47,11 +49,14 @@ src/
 │
 ├── constants/
 │   ├── Navbar.constants.ts
+│   ├── Store.constants.ts
 │   └── Dock.constants.tsx
 ├── public/
 │   ├── icons/
 │   ├── images/
 │   └── wallpaper.webp
+├── store/
+│   └── window.ts
 ```
 
 ---
@@ -77,6 +82,15 @@ src/
 - **Dock** → Client Component (interactive layout & animations)
 - **GSAP hover logic** → Client-only (mouse tracking & magnification)
 - Ensures smooth interactions by running **pointer-based animations only on the client**
+
+---
+
+## 🪟 Window Store Architecture
+
+- **Window Store (Zustand + Immer)** → Client-only state manager (window lifecycle & stacking)
+- **Single `toggleWindow` action** → Controls open, focus, and z-index behavior
+- **Centralized window config** → Ensures consistent IDs, default state, and type safety
+- Guarantees predictable window behavior by keeping **UI state and side effects out of components**
 
 ---
 
