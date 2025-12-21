@@ -36,16 +36,22 @@ const WINDOW_CONFIG: Record<WindowKey, WindowItem> = Object.fromEntries(
 // Main store function
 const useWindowStore = create<WindowState>()(
   immer((set) => ({
+    // Get all the windows
     windows: WINDOW_CONFIG,
+    // Z-index updater
     nextZIndex: INITIAL_Z_INDEX + 1,
 
     // Toggle window
     toggleWindow: (key, data = null) =>
       set((state) => {
+        // Get the window
         const win = state.windows[key];
 
+        // Return if no window
+        if (!win) return;
+
         if (!win.isOpen) {
-          // Open functionn
+          // Open function
           win.isOpen = true;
           win.zIndex = state.nextZIndex++;
           win.data = data;
