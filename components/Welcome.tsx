@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 // Internal imports
 import WelcomeClient from "./Welcome.client";
 import FullscreentToggle from "./FullscreentToggle";
+import NavbarOptions from "./NavbarControlCenter";
 
 // Font used in GSAP
 const inter = Inter({
@@ -33,7 +34,7 @@ const Welcome = () => {
   return (
     <section
       id="welcome"
-      className={`${inter.className} flex flex-col items-center justify-center text-white h-dvh`}
+      className={`${inter.className} flex relative flex-col items-center justify-center text-white h-dvh`}
     >
       <p data-subtitle>
         {renderText("Portfolio OS", "text-8xl font-normal", 200)}
@@ -48,6 +49,8 @@ const Welcome = () => {
       </h1>
 
       <FullscreentToggle />
+
+      {true && <NavbarOptions />}
 
       {/* Client-only logic */}
       <WelcomeClient />

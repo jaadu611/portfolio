@@ -48,9 +48,10 @@ const Navbar = () => {
         <ul className="flex items-center gap-3">
           {navbarIcons.map((icon) => (
             <button
-              className="hover:cursor-pointer hover:bg-white/30 p-1 rounded-md transition-all"
+              className="hover:cursor-pointer flex gap-3 text-md font-semibold hover:bg-white/30 p-1 rounded-md transition-all"
               key={icon.name}
             >
+              {icon.name === "Battery" && <span className="mt-0.5">101%</span>}
               <Image
                 src={icon.link}
                 alt={`${icon.name}-logo`}
