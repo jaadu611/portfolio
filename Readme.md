@@ -51,6 +51,7 @@ src/
 │   ├── NavTime.tsx
 │   ├── Dock.tsx
 │   ├── FullscreenToggle.tsx
+│   ├── NavbarControlCenter.tsx
 │   ├── WindowControls.tsx
 │   └── Welcome.tsx
 │

@@ -163,7 +163,7 @@ const windowWrapper = <P extends object>(
         {/* Header with window controls */}
         <div
           ref={headerRef}
-          className="flex h-10 items-center justify-between px-4 rounded-t-lg bg-[#f5f5f7] border-b border-[#d1d1d1] select-none text-sm text-[#1f1f1f]"
+          className="flex h-10 items-center justify-center px-4 rounded-t-lg bg-[#f5f5f7] border-b border-[#d1d1d1] select-none text-sm text-[#1f1f1f]"
         >
           <WindowControls target={windowKey} />
           <h2>{title}</h2>

@@ -6,7 +6,7 @@ import Terminal from "@/Windows/Terminal";
 // Main page function
 const page = () => {
   return (
-    <main className="">
+    <main>
       <Welcome />
       <Dock />
       <Terminal />

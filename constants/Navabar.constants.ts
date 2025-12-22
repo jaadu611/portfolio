@@ -3,6 +3,7 @@ const navbarLinks: string[] = ["Portfolio", "Contacts", "Projects"];
 
 // Navbar icons
 const navbarIcons: { name: string; link: string }[] = [
+  { name: "Battery", link: "/icons/Battery.svg" },
   { name: "Wifi", link: "/icons/Wifi.svg" },
   { name: "Search", link: "/icons/Search.svg" },
   { name: "User", link: "/icons/User.svg" },

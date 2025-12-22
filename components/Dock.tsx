@@ -107,6 +107,7 @@ const Dock = () => {
               data-tooltip-delay-show={300}
               disabled={!canOpen}
               onClick={() => toggleApp({ id, canOpen })}
+              className="cursor-pointer"
             >
               <Image
                 src={`/images/${icon}`}
