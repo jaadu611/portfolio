@@ -1,13 +1,22 @@
+import useControlCenterStore from "@/store/controlCenter";
+
 // Navbar links
 const navbarLinks: string[] = ["Portfolio", "Contacts", "Projects"];
 
-// Navbar icons
-const navbarIcons: { name: string; link: string }[] = [
-  { name: "Battery", link: "/icons/Battery.svg" },
-  { name: "Wifi", link: "/icons/Wifi.svg" },
-  { name: "Search", link: "/icons/Search.svg" },
-  { name: "User", link: "/icons/User.svg" },
-  { name: "Switch", link: "/icons/Switch.svg" },
-];
+const useNavbarIcons = () => {
+  const { toggleControlCenter } = useControlCenterStore();
 
-export { navbarLinks, navbarIcons };
+  return [
+    { name: "Battery", link: "/icons/Battery.svg", onClick: () => {} },
+    { name: "Wifi", link: "/icons/Wifi.svg", onClick: () => {} },
+    { name: "Search", link: "/icons/Search.svg", onClick: () => {} },
+    { name: "User", link: "/icons/User.svg", onClick: () => {} },
+    {
+      name: "Switch",
+      link: "/icons/Switch.svg",
+      onClick: toggleControlCenter,
+    },
+  ] as const;
+};
+
+export { navbarLinks, useNavbarIcons };

@@ -2,8 +2,9 @@
 import Image from "next/image";
 
 //Internal imports
-import { navbarIcons, navbarLinks } from "@/constants/Navabar.constants";
+import { navbarLinks } from "@/constants/Navabar.constants";
 import NavTime from "./NavTime";
+import NavbarButtons from "./NavbarButtons";
 
 // Main Navbar component
 const Navbar = () => {
@@ -45,23 +46,7 @@ const Navbar = () => {
       {/* Right Side of the navbar */}
       <div className="flex items-center max-sm:w-full max-sm:justify-center gap-5">
         {/* Navbar icons */}
-        <ul className="flex items-center gap-3">
-          {navbarIcons.map((icon) => (
-            <button
-              className="hover:cursor-pointer flex gap-3 text-md font-semibold hover:bg-white/30 p-1 rounded-md transition-all"
-              key={icon.name}
-            >
-              {icon.name === "Battery" && <span className="mt-0.5">101%</span>}
-              <Image
-                src={icon.link}
-                alt={`${icon.name}-logo`}
-                height={20}
-                width={20}
-              />
-            </button>
-          ))}
-        </ul>
-
+        <NavbarButtons />
         <NavTime />
       </div>
     </nav>
