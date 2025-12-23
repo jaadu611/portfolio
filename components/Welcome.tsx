@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 // Internal imports
 import WelcomeClient from "./Welcome.client";
 import FullscreentToggle from "./FullscreentToggle";
-import NavbarOptions from "./NavbarControlCenter";
+import NavbarOptions from "./NavbarControlCenterWrapper";
 
 // Font used in GSAP
 const inter = Inter({

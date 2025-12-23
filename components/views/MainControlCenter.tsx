@@ -1,6 +1,4 @@
-// External imports
 import {
-  Bluetooth,
   ChevronRight,
   LucideVolume2,
   Play,
@@ -8,16 +6,16 @@ import {
   SkipBack,
   SkipForward,
   Sun,
+  Wifi,
 } from "lucide-react";
 import Image from "next/image";
+import BluetoothButton from "../controlCenterButtons/Bluetooth";
 
 const value = 60; // Example volume value
 
-// Main Navbar Control Center component
-const NavbarControlCenter = () => {
+const MainControlCenter = () => {
   return (
-    // Control Center Section
-    <section className="absolute top-5 right-5 p-3 w-105 bg-white/30 backdrop-blur-xl rounded-2xl flex flex-col gap-4 duration-200 transition-all shadow-[2px_2px_8px_rgba(0,0,0,0.2)]">
+    <div className="flex flex-col gap-5">
       {/* Top half */}
       <div className="flex flex-1 rounded-lg gap-2">
         {/* Left half */}
@@ -25,13 +23,7 @@ const NavbarControlCenter = () => {
           {/* Wi-Fi */}
           <span className="group flex gap-3 px-3 py-3 rounded-t-xl flex-1 hover:bg-white/30 cursor-pointer items-center justify-between transition-all duration-200">
             <div className="flex items-center gap-3">
-              <Image
-                src="/icons/Wifi-white.svg"
-                alt="Wi-Fi"
-                height={32}
-                width={32}
-                className="p-1.5 bg-blue-600 rounded-full"
-              />
+              <Wifi className="bg-blue-600 p-1.5 size-8 rounded-full" />
               <div className="flex flex-col leading-tight">
                 <span className="font-medium text-black text-sm">Wi-Fi</span>
                 <span className="font-normal text-gray-800 text-[10px]">
@@ -46,23 +38,7 @@ const NavbarControlCenter = () => {
           </span>
 
           {/* Bluetooth */}
-          <span className="group px-3 py-3 flex-1 cursor-pointer hover:bg-white/30 flex items-center justify-between transition-all duration-200">
-            <div className="flex items-center gap-3">
-              <Bluetooth className="bg-blue-600 p-1.5 size-8 rounded-full" />
-              <div className="flex flex-col leading-tight">
-                <span className="font-medium text-black text-sm">
-                  Bluetooth
-                </span>
-                <span className="font-normal text-gray-800 text-[10px]">
-                  On
-                </span>
-              </div>
-            </div>
-            <ChevronRight
-              size={16}
-              className="text-black/50 opacity-0 -translate-x-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0"
-            />
-          </span>
+          <BluetoothButton />
 
           {/* AirDrop */}
           <span className="group px-3 py-3 flex-1 rounded-b-xl hover:bg-white/30 cursor-pointer flex items-center justify-between transition-all duration-200">
@@ -73,6 +49,7 @@ const NavbarControlCenter = () => {
                 height={32}
                 width={32}
                 className="p-1.5 bg-blue-600 rounded-full"
+                loading="lazy"
               />
               <div className="flex flex-col leading-tight">
                 <span className="font-medium text-black text-sm">AirDrop</span>
@@ -87,20 +64,26 @@ const NavbarControlCenter = () => {
             />
           </span>
         </div>
+
         {/* Right half */}
         <div className="flex flex-col flex-1 pl-2 gap-3">
           {/* Focus */}
-          <span className="group flex flex-1 items-center gap-3 px-3 py-2 cursor-pointer bg-white/40 hover:bg-white/50 duration-200 transition-all rounded-2xl shadow-[2px_2px_8px_rgba(0,0,0,0.2)]">
-            <Image
-              src="/icons/Moon.svg"
-              height={38}
-              width={38}
-              alt="Focus"
-              className="rounded-full bg-gray-700/30 p-2 transition-colors duration-200"
-            />
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold text-black">Focus</span>
-              <span className="text-[10px] text-black/60">Do not disturb</span>
+          <span className="group flex flex-1 items-center justify-between px-3 py-2 cursor-pointer bg-white/40 hover:bg-white/50 duration-200 transition-all rounded-2xl shadow-[2px_2px_8px_rgba(0,0,0,0.2)]">
+            <div className="gap-3 flex">
+              <Image
+                src="/icons/Moon.svg"
+                height={38}
+                width={38}
+                alt="Focus"
+                loading="lazy"
+                className="rounded-full bg-gray-700/30 p-2 transition-colors duration-200"
+              />
+              <div className="flex flex-col leading-tight">
+                <span className="text-sm font-semibold text-black">Focus</span>
+                <span className="text-[10px] text-black/60">
+                  Do not disturb
+                </span>
+              </div>
             </div>
             <ChevronRight
               size={16}
@@ -108,15 +91,15 @@ const NavbarControlCenter = () => {
             />
           </span>
 
-          {/* Other Controls */}
+          {/* Other controls */}
           <div className="flex flex-1 gap-3">
-            {/* State Manager */}
             <span className="group flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl bg-white/40 hover:bg-white/50 px-3 py-3 cursor-pointer shadow-[2px_2px_8px_rgba(0,0,0,0.2)] transition-all duration-200">
               <div className="h-9 w-9 rounded-full bg-gray-700/30 flex items-center justify-center">
                 <Image
                   src="/icons/StateManager.svg"
                   className="text-black"
                   alt="State Manager"
+                  loading="lazy"
                   width={24}
                   height={24}
                 />
@@ -126,7 +109,6 @@ const NavbarControlCenter = () => {
               </span>
             </span>
 
-            {/* Screen Mirror */}
             <span className="group flex flex-1 flex-col items-center justify-center gap-1.5 rounded-xl bg-white/40 hover:bg-white/50 px-3 py-3 cursor-pointer shadow-[2px_2px_8px_rgba(0,0,0,0.2)] transition-all duration-200">
               <div className="h-9 w-9 rounded-full bg-gray-700/30 flex items-center justify-center">
                 <ScreenShareIcon className="h-4 w-4 text-black" />
@@ -138,9 +120,8 @@ const NavbarControlCenter = () => {
           </div>
         </div>
       </div>
-
       {/* Bottom half */}
-      <div className="flex flex-col gap-2 rounded-lg">
+      <div className="flex flex-col gap-3 rounded-lg">
         {/* Display */}
         <span className="flex flex-col flex-1 justify-center gap-2 p-3 bg-white/40 hover:bg-white/50 transition-all duration-200 rounded-xl shadow-[2px_2px_8px_rgba(0,0,0,0.2)]">
           <span className="font-medium text-black text-sm">Display</span>
@@ -194,6 +175,7 @@ const NavbarControlCenter = () => {
             <Image
               src="/music/the-they-not-like-us.webp"
               alt="Now Playing"
+              loading="lazy"
               fill
               className="object-cover"
             />
@@ -241,8 +223,8 @@ const NavbarControlCenter = () => {
           </div>
         </span>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default NavbarControlCenter;
+export default MainControlCenter;
