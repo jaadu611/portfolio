@@ -7,13 +7,13 @@ const useNavbarIcons = () => {
   const { toggleControlCenter } = useControlCenterStore();
 
   return [
-    { name: "Battery", link: "/icons/Battery.svg", onClick: () => {} },
-    { name: "Wifi", link: "/icons/Wifi.svg", onClick: () => {} },
-    { name: "Search", link: "/icons/Search.svg", onClick: () => {} },
-    { name: "User", link: "/icons/User.svg", onClick: () => {} },
+    { name: "Battery", link: "/icons/Battery", onClick: () => {} },
+    { name: "Wifi", link: "/icons/Wifi", onClick: () => {} },
+    { name: "Search", link: "/icons/Search", onClick: () => {} },
+    { name: "User", link: "/icons/User", onClick: () => {} },
     {
       name: "Switch",
-      link: "/icons/Switch.svg",
+      link: "/icons/Switch",
       onClick: toggleControlCenter,
     },
   ] as const;

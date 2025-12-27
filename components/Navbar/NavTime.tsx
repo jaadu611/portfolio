@@ -1,11 +1,14 @@
 "use client";
 
+import { useHydrated } from "@/hooks/useHydrated";
 //External imports
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 
 // Main NavTime component
 const NavTime = () => {
+  const hydrated = useHydrated();
+
   // Mounted state
   const [mounted, setMounted] = useState(false);
   //Time state
@@ -23,10 +26,12 @@ const NavTime = () => {
     return () => clearInterval(interval);
   }, []);
 
+  if (!hydrated) return null;
+
   if (!mounted) return null;
   return (
     //Time and Date
-    <time className="cursor-pointer transition-all hover:bg-white/30 p-1 rounded-md font-medium">
+    <time className="cursor-pointer hover:bg-white/30 dark:hover:bg-white/10 p-2 rounded-md font-medium">
       {time.format("ddd D h:mm A")}
     </time>
   );

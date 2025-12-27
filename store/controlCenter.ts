@@ -3,10 +3,8 @@ import { immer } from "zustand/middleware/immer";
 
 interface ControlCenterState {
   isControlCenterOpen: boolean;
-  mode: "main" | "bluetooth";
 
   toggleControlCenter: () => void;
-  changeControlCenterMode: (mode: ControlCenterState["mode"]) => void;
 }
 
 const useControlCenterStore = create<ControlCenterState>()(
@@ -18,16 +16,6 @@ const useControlCenterStore = create<ControlCenterState>()(
     toggleControlCenter: () =>
       set((state) => {
         state.isControlCenterOpen = !state.isControlCenterOpen;
-
-        if (state.isControlCenterOpen) {
-          state.mode = "main";
-        }
-      }),
-
-    // Change active view
-    changeControlCenterMode: (mode) =>
-      set((state) => {
-        state.mode = mode;
       }),
   }))
 );

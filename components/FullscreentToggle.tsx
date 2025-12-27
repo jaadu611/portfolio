@@ -29,6 +29,10 @@ const FullscreenToggle = () => {
   return (
     <button
       onClick={toggleFullscreen}
+      name="Toggle Fullscreen"
+      type="button"
+      aria-label="Toggle Fullscreen"
+      title="Toggle Fullscreen"
       className="fixed bottom-5 right-5 z-9999 flex items-center gap-2 rounded-lg bg-black/70 px-4 py-2 text-sm text-white backdrop-blur hover:bg-black"
     >
       {isFullscreen ? (

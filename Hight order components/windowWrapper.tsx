@@ -34,19 +34,23 @@ const windowWrapper = <P extends object>(
     const draggableRef = useRef<Draggable | null>(null);
 
     // Save last position
-    const [lastState, setLastState] = useState({
-      top: 0,
-      left: 0,
-      width: 720,
-      height: 420,
-    });
+    const [lastState, setLastState] = useState<{
+      top: number;
+      left: number;
+      width: number;
+      height: number;
+    } | null>(null);
+
+    const [wasMaximized, setWasMaximized] = useState(false);
 
     // Make the window appear at the center
     useEffect(() => {
       if (typeof window === "undefined") return;
+      if (lastState) return;
 
       const width = 720;
       const height = 420;
+
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLastState({
         top: window.innerHeight / 2 - height / 2,
@@ -54,37 +58,56 @@ const windowWrapper = <P extends object>(
         width,
         height,
       });
-    }, []);
+    }, [lastState]);
 
     // Open and close function
     useGSAP(() => {
       const el = windowRef.current;
       if (!el) return;
 
-      if (isOpen) {
+      if (isOpen && lastState) {
         el.style.display = "block";
 
-        gsap.set(el, {
-          top: lastState.top,
-          left: lastState.left,
-          position: "absolute",
-        });
+        // Restore previous state
+        if (wasMaximized) {
+          gsap.set(el, {
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            position: "fixed",
+            borderRadius: 0,
+          });
+        } else {
+          gsap.set(el, {
+            top: lastState.top,
+            left: lastState.left,
+            width: lastState.width,
+            height: lastState.height,
+            position: "absolute",
+            borderRadius: 10,
+          });
+        }
 
         gsap.fromTo(
           el,
           { scale: 0.8, opacity: 0, y: 40 },
-          { scale: 1, opacity: 1, y: 0, duration: 0.2, ease: "power1" }
+          { scale: 1, opacity: 1, y: 0, duration: 0.25, ease: "power1.out" }
         );
-      } else {
+      } else if (el.style.display !== "none") {
         gsap.to(el, {
           scale: 0.8,
           opacity: 0,
           y: 40,
-          duration: 0.2,
-          ease: "power1",
+          duration: 0.25,
+          ease: "power1.in",
           onComplete: () => {
-            if (kill) gsap.set(el, { x: 0, y: 0, clearProps: "transform" });
             el.style.display = "none";
+            if (kill) {
+              gsap.set(el, { clearProps: "all" });
+              setLastState(null);
+              setWasMaximized(false);
+            }
           },
         });
       }
@@ -100,10 +123,18 @@ const windowWrapper = <P extends object>(
 
       if (!isMaximized) {
         const [instance] = Draggable.create(el, {
-          type: "x,y",
+          type: "left,top",
           trigger: handle,
           onPress: () => focusWindow(windowKey),
-          edgeResistance: 0.65,
+          onDragEnd: () => {
+            const rect = el.getBoundingClientRect();
+            setLastState({
+              top: rect.top,
+              left: rect.left,
+              width: rect.width,
+              height: rect.height,
+            });
+          },
           bounds: document.body,
         });
         draggableRef.current = instance;
@@ -116,37 +147,44 @@ const windowWrapper = <P extends object>(
       const el = windowRef.current;
       if (!el) return;
 
-      const rect = el.getBoundingClientRect();
+      if (isMaximized) {
+        draggableRef.current?.kill();
+        draggableRef.current = null;
 
-      if (!isMaximized) {
-        gsap.to(el, {
-          duration: 0.3,
-          top: lastState.top,
-          left: lastState.left,
-          width: lastState.width,
-          height: lastState.height,
-          borderRadius: 10,
-          position: "absolute",
-          ease: "power2.inOut",
-        });
-      } else {
+        // Save current position and size
+        const rect = el.getBoundingClientRect();
         setLastState({
           top: rect.top,
           left: rect.left,
           width: rect.width,
           height: rect.height,
         });
+        setWasMaximized(true);
 
+        gsap.set(el, { clearProps: "transform" });
         gsap.to(el, {
-          duration: 0.3,
-          x: 0,
-          y: 0,
+          duration: 0.25,
           top: 0,
           left: 0,
           width: "100vw",
           height: "100vh",
           borderRadius: 0,
           position: "fixed",
+          ease: "power2.inOut",
+        });
+      } else if (lastState) {
+        // Restore previous position
+        gsap.set(el, { clearProps: "transform" });
+        setWasMaximized(false);
+
+        gsap.to(el, {
+          duration: 0.25,
+          top: lastState.top,
+          left: lastState.left,
+          width: lastState.width,
+          height: lastState.height,
+          borderRadius: 10,
+          position: "absolute",
           ease: "power2.inOut",
         });
       }
@@ -158,12 +196,12 @@ const windowWrapper = <P extends object>(
         id={windowKey}
         ref={windowRef}
         style={{ zIndex, display: "none" }}
-        className="absolute bg-white shadow-lg flex flex-col"
+        className="absolute shadow-lg flex flex-col rounded-lg"
       >
         {/* Header with window controls */}
         <div
           ref={headerRef}
-          className="flex h-10 items-center justify-center px-4 rounded-t-lg bg-[#f5f5f7] border-b border-[#d1d1d1] select-none text-sm text-[#1f1f1f]"
+          className="flex h-10 items-center justify-center px-4 rounded-t-lg bg-[#f5f5f7] dark:bg-gray-800 border-b border-[#d1d1d1] dark:border-gray-700 select-none text-sm text-[#1f1f1f] dark:text-gray-200"
         >
           <WindowControls target={windowKey} />
           <h2>{title}</h2>
