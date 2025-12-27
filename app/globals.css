@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
-@keyframes blink {
-  50% {
-    opacity: 0;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
   }
 }

@@ -47,22 +47,35 @@ src/
 │   └── globals.css
 │
 ├── components/
-│   ├── Navbar.tsx
-│   ├── NavTime.tsx
+│   ├── Navbar/
+│   │   ├── AppleLogo.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── NavbarButtons.tsx
+│   │   ├── NavbarControlCenter.tsx
+│   │   └── NavTime.tsx
+│   │
+│   ├── Welcome/
+│   │   ├── Welcome.tsx
+│   │   └── Welcome.client.tsx
+│   │
 │   ├── Dock.tsx
 │   ├── FullscreenToggle.tsx
-│   ├── NavbarControlCenter.tsx
 │   ├── WindowControls.tsx
-│   └── Welcome.tsx
+│   └── ThemeChange.tsx
+│
+├── High order components/
+│   ├── NavbarControlCenterWrapper.tsx
+│   └── windowWrapper.tsx
 │
 ├── constants/
 │   ├── Navbar.constants.ts
 │   ├── Terminal.constants.ts
+│   ├── BluetoothDevices.constants.ts
 │   ├── Store.constants.ts
 │   └── Dock.constants.tsx
 │
-├── hoc/
-│   └── windowWrapper.tsx
+├── hooks/
+│   └── useHydrated.tsx
 │
 ├── public/
 │   ├── icons/
@@ -75,66 +88,6 @@ src/
 └── Windows/
     └── Terminal.tsx
 ```
-
----
-
-## 🧭 Navbar Architecture
-
-- **Navbar** → Server Component (static, fast)
-- **NavTime** → Client Component (dynamic time)
-- Prevents hydration issues by rendering time **only after mount**
-
----
-
-## 👋 Welcome Screen Architecture
-
-- **Welcome** → Server Component (layout & static copy)
-- **Welcome.client** → Client Component (dynamic greeting / effects)
-- Avoids hydration mismatches by running **time or state-based logic only on the client**
-
----
-
-## 🖥️ Dock Architecture
-
-- **Dock** → Client Component (interactive layout & animations)
-- **GSAP hover logic** → Client-only (mouse tracking & magnification)
-- Ensures smooth interactions by running **pointer-based animations only on the client**
-
----
-
-## 🪟 Window Store Architecture
-
-- **Zustand-based window store** → Client-only state manager for window lifecycle & stacking
-- **Single `toggleWindow` action** → Handles open, focus, and z-index updates
-- **Centralized window config** → Enforces consistent IDs, defaults, and type safety
-- Keeps **UI components stateless** and behavior predictable
-
----
-
-## 🧩 Window Wrapper HOC
-
-- **Higher-order wrapper** → Injects drag, focus, and animation logic
-- **Shared behavior layer** → Eliminates duplication across windows
-- **Content-agnostic design** → Wrapped components remain UI-only
-- Guarantees **consistent window behavior** system-wide
-
----
-
-## 🖥️ Terminal Architecture
-
-- **Keyboard-driven input loop** → No hidden inputs or forms
-- **Command registry pattern** → Declarative, extensible command system
-- **Deterministic history rendering** → Output is replayable and predictable
-- **Focus-aware cursor state** → Visual feedback matches interaction
-
----
-
-## 🎬 Animation Layer
-
-- **GSAP-powered transitions** → Open, close, maximize, restore
-- **State-driven animations** → UI reacts to store changes, not events
-- **Safe transform management** → Prevents layout drift
-- Ensures **smooth, interruption-free motion**
 
 ---
 
@@ -192,6 +145,7 @@ Background wallpaper is applied via inline styles for compatibility with Next.js
 - Centralize **global state (Zustand)** for client interactions to avoid prop drilling
 - Wrap complex behaviors in **HOCs** or reusable hooks to reduce duplication
 - Keep **animation state separate from layout state** to prevent unnecessary re-renders
+- Restore UI from **cached state**, not DOM inference
 
 ---
 

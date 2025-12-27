@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import windowWrapper from "@/hoc/windowWrapper";
+import windowWrapper from "@/Hight-order-components/windowWrapper";
 import {
   TERMINAL_COMMANDS,
   COMMAND_NOT_FOUND,
@@ -66,7 +66,7 @@ const Terminal = () => {
 
   return (
     <div
-      className="flex flex-col h-full w-full bg-[#1e1e1e] text-[#e5e7eb] font-mono text-[13px]"
+      className="flex flex-col rounded-b-lg h-full w-full bg-gray-900 text-[#e5e7eb] font-mono text-[13px]"
       onClick={() => containerRef.current?.focus()}
     >
       <div
@@ -89,7 +89,12 @@ const Terminal = () => {
         ))}
 
         <p>
-          <span className="text-[#e5e7eb] -mr-1">@Jaadu-mac ~ %</span>
+          <span className="text-[#e5e7eb] font-mono">
+            <span className="text-green-400 dark:text-green-500">
+              @Jaadu-mac
+            </span>{" "}
+            ~ %
+          </span>
           <span className="ml-3">{input}</span>
           <span
             className={`inline-block relative w-1.75 h-3.5 -top-1.25 align-bottom ${
