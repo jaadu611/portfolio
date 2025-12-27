@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import windowWrapper from "@/Hight order components/windowWrapper";
+import windowWrapper from "@/Hight-order-components/windowWrapper";
 import {
   TERMINAL_COMMANDS,
   COMMAND_NOT_FOUND,
