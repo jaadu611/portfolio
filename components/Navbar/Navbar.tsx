@@ -1,8 +1,8 @@
 // Internal imports
 import { navbarLinks } from "@/constants/Navabar.constants";
-import NavTime from "./NavTime";
 import NavbarButtons from "./NavbarButtons";
 import AppleLogo from "./AppleLogo";
+import NavTime from "./NavTime";
 
 // Main Navbar component
 const Navbar = () => {
