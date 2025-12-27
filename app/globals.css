@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-@utility dark {
-  :where(.dark) & {
-    @composite;
-  }
-}
-
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {

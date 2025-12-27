@@ -145,13 +145,7 @@ Background wallpaper is applied via inline styles for compatibility with Next.js
 - Centralize **global state (Zustand)** for client interactions to avoid prop drilling
 - Wrap complex behaviors in **HOCs** or reusable hooks to reduce duplication
 - Keep **animation state separate from layout state** to prevent unnecessary re-renders
-- Wrap complex UI behavior in **HOCs or reusable hooks**
-- Keep **animation state separate from layout state**
-- Persist **UI intent separately from geometry** (e.g. `wasMaximized`)
-- Capture window layout **before transitions** for accurate restore
-- Use **GSAP for imperative animations**, React state for logic
-- Kill and recreate **side-effectful instances** (e.g. Draggable) when constraints change
-- Restore UI from **cached state**, not DOM inference8
+- Restore UI from **cached state**, not DOM inference
 
 ---
 

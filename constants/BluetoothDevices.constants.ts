@@ -11,7 +11,7 @@ const devices = [
   {
     name: "Device 1",
     icon: Laptop,
-    charge: "80%",
+    charge: "50%",
     battery: BatteryMedium,
   },
   {

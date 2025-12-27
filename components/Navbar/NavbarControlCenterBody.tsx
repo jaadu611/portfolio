@@ -73,10 +73,10 @@ const NavbarControlCenterBody = () => {
 
           {/* AirDrop */}
           <button
-            name="Contacts"
+            name="AirDrop"
             type="button"
-            aria-label="Contacts"
-            title="Contacts"
+            aria-label="AirDrop"
+            title="AirDrop"
             className="group px-3 py-3 flex-1 cursor-pointer hover:bg-white/30 dark:hover:bg-white/15 flex rounded-b-2xl items-center justify-between transition-all duration-200"
           >
             <div className="flex items-center gap-3">
