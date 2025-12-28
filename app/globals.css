@@ -10,3 +10,9 @@
     color-scheme: dark;
   }
 }
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
