@@ -88,21 +88,34 @@ const Terminal = () => {
           </p>
         ))}
 
-        <p>
+        <p className="relative">
+          {/* Terminal prompt */}
           <span className="text-[#e5e7eb] font-mono">
             <span className="text-green-400 dark:text-green-500">
               @Jaadu-mac
             </span>{" "}
             ~ %
           </span>
+
+          {/* User input */}
           <span className="ml-3">{input}</span>
+
+          {/* Placeholder, only visible when input is empty */}
+          {!input && (
+            <span className="absolute ml-3 text-gray-400 font-mono select-none pointer-events-none">
+              Write &apos;skills&apos; to see my skill tree or &apos;help&apos;
+              to see all commands.
+            </span>
+          )}
+
+          {/* Blinking caret */}
           <span
             className={`inline-block relative w-1.75 h-3.5 -top-1.25 align-bottom ${
               isFocused
                 ? "bg-[#e5e7eb] animate-[blink_1s_steps(1)_infinite]"
-                : "border border-[#e5e7eb] bg-transparent "
+                : "border border-[#e5e7eb] bg-transparent"
             }`}
-          />{" "}
+          />
         </p>
       </div>
     </div>
