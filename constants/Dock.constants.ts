@@ -14,7 +14,7 @@ const dockApps: {
   },
   {
     id: "safari",
-    name: "Articles",
+    name: "Safari",
     icon: "safari.webp",
   },
   {
@@ -29,7 +29,7 @@ const dockApps: {
   },
   {
     id: "terminal",
-    name: "Skills",
+    name: "Terminal",
     icon: "terminal.webp",
   },
   {

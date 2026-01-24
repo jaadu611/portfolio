@@ -8,7 +8,11 @@ import {
 } from "@/constants/Terminal.constants";
 import useWindowStore from "@/store/window";
 
-const Terminal = () => {
+interface TerminalProps {
+  isMaximized?: boolean;
+}
+
+const Terminal = ({ isMaximized }: TerminalProps) => {
   const { windows } = useWindowStore();
   const [history, setHistory] = useState<string[]>([]);
   const [input, setInput] = useState("");
@@ -66,7 +70,9 @@ const Terminal = () => {
 
   return (
     <div
-      className="flex flex-col rounded-b-lg h-full w-full bg-gray-900 text-[#e5e7eb] font-mono text-[13px]"
+      className={`flex flex-col ${
+        isMaximized ? "" : "rounded-b-lg"
+      } h-full w-full bg-gray-900 text-[#e5e7eb] font-mono text-[13px]`}
       onClick={() => containerRef.current?.focus()}
     >
       <div

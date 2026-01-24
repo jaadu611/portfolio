@@ -19,7 +19,8 @@ gsap.registerPlugin(Draggable);
 const windowWrapper = <P extends object>(
   Component: ComponentType<P>,
   windowKey: keyof typeof WINDOW_CONFIG,
-  title: string
+  title?: string,
+  Extentions?: ComponentType<P>,
 ) => {
   const Wrapped = (props: P) => {
     // Fetch state
@@ -92,7 +93,7 @@ const windowWrapper = <P extends object>(
         gsap.fromTo(
           el,
           { scale: 0.8, opacity: 0, y: 40 },
-          { scale: 1, opacity: 1, y: 0, duration: 0.25, ease: "power1.out" }
+          { scale: 1, opacity: 1, y: 0, duration: 0.25, ease: "power1.out" },
         );
       } else if (el.style.display !== "none") {
         gsap.to(el, {
@@ -195,21 +196,39 @@ const windowWrapper = <P extends object>(
       <section
         id={windowKey}
         ref={windowRef}
-        style={{ zIndex, display: "none" }}
+        style={{
+          zIndex,
+          display: "none",
+        }}
         className="absolute shadow-lg flex flex-col rounded-lg"
       >
         {/* Header with window controls */}
         <div
           ref={headerRef}
-          className="flex h-10 items-center justify-center px-4 rounded-t-lg bg-[#f5f5f7] dark:bg-gray-800 border-b border-[#d1d1d1] dark:border-gray-700 select-none text-sm text-[#1f1f1f] dark:text-gray-200"
+          className={`flex h-10 items-center justify-between px-2 ${
+            isMaximized ? "" : "rounded-t-lg"
+          } bg-[#f5f5f7] dark:bg-gray-800 border-b border-[#d1d1d1] dark:border-gray-700 select-none text-sm text-[#1f1f1f] dark:text-gray-200`}
         >
           <WindowControls target={windowKey} />
-          <h2>{title}</h2>
+
+          {/* Center: title */}
+          {title && (
+            <h2 className="absolute left-1/2 transform -translate-x-1/2 truncate">
+              {title}
+            </h2>
+          )}
+
+          {/* Right: extension */}
+          {Extentions && (
+            <div className="flex-1 min-w-0 ml-30">
+              <Extentions {...props} />
+            </div>
+          )}
         </div>
 
         {/* Main body with decreased height */}
         <div className="h-[calc(100%-40px)]">
-          <Component {...props} />
+          <Component {...props} isMaximized={isMaximized} />
         </div>
       </section>
     );
